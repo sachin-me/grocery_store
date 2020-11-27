@@ -4,7 +4,7 @@ module TakeUserInput
     input = gets.chomp!
 
     if input.length > 0
-
+      parse_str(input)
     else
       puts "Please place an order to continue"
       take_input
