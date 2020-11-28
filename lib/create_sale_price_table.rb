@@ -1,5 +1,9 @@
 class SalePrice
   def initialize
+    @sale_price_list = {}
+  end
+  
+  def sale_price
     @sale_price_list = {
       milk: {
         unit_price: 3.97,

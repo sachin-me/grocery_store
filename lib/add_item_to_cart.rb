@@ -7,7 +7,7 @@ class CartItem
   attr_reader :orders
 
   def initialize
-    @orders = []
+    @orders = {}
   end
 
   def display_bill
@@ -21,10 +21,11 @@ class CartItem
 
   def add_item_to_cart(items)
     items_store = SalePrice.new
-    items_keys = items_store.sale_price_list.keys
+    items_keys = items_store.sale_price.keys
 
     @orders, unavailable_items = items.partition { |item| items_keys.include?(item.to_sym) }
-
+    p @orders, 'orders'
+    @orders = @orders.collect { |str| str.to_sym }
     puts "\n#{unavailable_items.join(", ")} is unavailable now." if unavailable_items.length > 0
     
     display_bill
