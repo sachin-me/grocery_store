@@ -12,7 +12,7 @@ class CalculateAmount
   def calculate_amount_without_sale
     @purchased_items_quantity.keys.reduce(0) { |sum, item| 
       cnvrt_item_to_sym = @sale_price_list[item.to_sym]
-      sum += purchased_items_quantity[item] * cnvrt_item_to_sym[:unit_price]
+      sum += @purchased_items_quantity[item] * cnvrt_item_to_sym[:unit_price]
     }
   end
 
@@ -32,5 +32,5 @@ class CalculateAmount
    : (@purchased_items_quantity[item] * item[:unit_price])
   end
 
-  
+
 end
