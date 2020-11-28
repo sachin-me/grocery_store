@@ -32,5 +32,5 @@ class CalculateAmount
    : (@purchased_items_quantity[item] * item[:unit_price])
   end
 
-  
+
 end
