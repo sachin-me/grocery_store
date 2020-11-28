@@ -9,8 +9,8 @@ class CalculateAmount
     @items = items
     @total_purchased_amount = 0
     @total_saved_amount = 0
-    @sale_price_list = SalePrice.new.sale_price_list
-    @purchased_items_quantity = @items.to_h
+    @sale_price_list = SalePrice.new.sale_price
+    @purchased_items_quantity = @items
   end
 
   def calculate_amount_without_sale
@@ -31,7 +31,7 @@ class CalculateAmount
   def calculate_item_price(item)
     item[:sale_quantity] >= 1 ?
      ((@purchased_items_quantity[item] / item[:sale_quantity]) * item[:sale_price]) + (
-       (@purchased_items_quantity[item.to_i] % item[:sale_quantity]) * item[:unit_price]
+       (@purchased_items_quantity[item] % item[:sale_quantity]) * item[:unit_price]
      )
    : (@purchased_items_quantity[item] * item[:unit_price])
   end
@@ -39,7 +39,8 @@ class CalculateAmount
   def checkout_bill
     bill = []
     @purchased_items_quantity.each do |key, val|
-      bill << [key.to_s, key[:sale_quantity], calculate_item_price(key)]
+      p key, 'key'
+      bill << [key, key[:sale_quantity], calculate_item_price(key)]
     end
     bill
   end
